@@ -4,17 +4,18 @@ app = Flask(__name__)
 
 def write_to_file_stl(data):
 	with open('database_stl.txt', mode='a') as database:
-		email = data['email']
-		subject = data['subject']
-		message = data['message']
-		file = database.write(f'\n{email}, {subject}, {message}')
+		device = data['device']
+		date = data['date']
+		comment = data['comment']
+		file = database.write(f'\n{device}, {date}, {comment}')
 def write_to_csv_stl(data):
 	with open('database_stl.csv', mode='a', newline='') as database:
-		email = data['email']
-		subject = data['subject']
-		message = data['message']
+		device = data['device']
+		date = data['date']
+		comment = data['comment']
 		csv_writer = csv.writer(database, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-		csv_writer.writerow([email,subject,message])
+		csv_writer.writerow([device,date,comment])
+
 @app.route('/stl', methods=['POST','GET'])
 def stl():
 	if request.method == 'POST':
